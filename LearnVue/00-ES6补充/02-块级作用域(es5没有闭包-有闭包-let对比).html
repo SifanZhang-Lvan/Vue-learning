@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>click1</button>
+  <button>click2</button>
+  <button>click3</button>
+  <button>click4</button>
+  <button>click5</button>
+<script>
+
+  // 1.没有块级作用域引起的问题：for的块级
+  // 为什么闭包可以解决问题：函数是一个作用域
+  var btns = document.getElementsByTagName('button');
+  for(var i = 0; i < btns.length; i++) {
+    (function (i) {
+      btns[i].addEventListener('click', function() {
+        console.log('第' + i + '个按钮被点击');
+      })
+    })(i)
+  }
+
+  // 1.情况一：es5中没有使用闭包（错误的方式）
+  var btns = document.getElementsByTagName('button');
+  for(var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function() {
+        console.log('第' + i + '个按钮被点击');
+      })
+  }
+
+  //情况二：es5使用闭包
+  var btns = document.getElementsByTagName('button');
+  for(var i = 0; i < btns.length; i++) {
+    (function (i) {
+      btns[i].addEventListener('click', function() {
+        console.log('第' + i + '个按钮被点击');
+      })
+    })(i)
+  }
+
+  //es6中的let
+  const btns = document.getElementsByTagName('button')
+  for(let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function() {
+        console.log('第' + i + '个按钮被点击');
+      })
+  }
+</script>
+</body>
+</html>
