@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- 对象语法的含义是：class后面跟的是一个对象。
+  对象语法有下面这些用法：
+  用法一：直接通过{}绑定一个类
+  用法二：也可以通过判断，传入多个值
+  用法三：和普通的类同时存在，并不冲突
+  注：如果isActive和isLine都为true，那么会有title/active/line三个类
+  用法四：如果过于复杂，可以放在一个methods或者computed中
+  注：classes是一个计算属性 -->
+
+  <div id="app">
+    <h2 class="title" v-bind:class="{active: isActive, line: isLine}">{{messages}}</h2>
+    <h2 class="title" v-bind:class="getclasses()">{{messages}}</h2>
+    <button v-on:click = "click">click</button>
+  </div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      messages: 'hello',
+      isActive: true,
+      isLine: true
+    },
+    methods: {
+      click: function() {
+        this.isActive = !this.isActive
+      },
+      getclasses: function() {
+        return {active: this.isActive, line: this.isLine}
+      }
+    }
+  })
+  
+</script>
+
+</body>
+</html>
